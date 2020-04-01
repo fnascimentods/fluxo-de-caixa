@@ -1,9 +1,9 @@
-object Form1: TForm1
+object frmMenu: TfrmMenu
   Left = 0
   Top = 0
-  Caption = 'Form1'
-  ClientHeight = 201
-  ClientWidth = 447
+  Caption = 'Fluxo de Caixa'
+  ClientHeight = 436
+  ClientWidth = 679
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -13,4 +13,13 @@ object Form1: TForm1
   OldCreateOrder = False
   PixelsPerInch = 96
   TextHeight = 13
+  object Button1: TButton
+    Left = 344
+    Top = 184
+    Width = 75
+    Height = 25
+    Caption = 'Button1'
+    TabOrder = 0
+    OnClick = Button1Click
+  end
 end

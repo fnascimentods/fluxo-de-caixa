@@ -83,6 +83,10 @@
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
+        <DCC_ExeOutput>C:\Users\felip\Documents\GitHub\fluxo-de-caixa\exe\</DCC_ExeOutput>
+        <DCC_DcuOutput>C:\Users\felip\Documents\GitHub\fluxo-de-caixa\dcu\</DCC_DcuOutput>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_Locale>1033</VerInfo_Locale>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -99,9 +103,29 @@
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
         <DCCReference Include="forms\ufrmMenu.pas">
-            <Form>Form1</Form>
+            <Form>frmMenu</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="forms\ufrmParametros.pas">
+            <Form>frmParametros</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="forms\ufrmPessoas.pas">
+            <Form>frmPessoas</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="forms\ufrmTitulos.pas">
+            <Form>frmTitulos</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="forms\uDM.pas">
+            <Form>dm</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="dao\uParametrosDAO.pas"/>
+        <DCCReference Include="classes\uParametros.pas"/>
+        <DCCReference Include="controls\uParametrosControl.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -122,9 +146,14 @@
                 <Source>
                     <Source Name="MainSource">FluxoDeCaixa.dpr</Source>
                 </Source>
+                <Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\DataExplorerDBXPluginEnt260.bpl">DBExpress Enterprise Data Explorer Integration</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k260.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp260.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+                </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="3">
-                <DeployFile LocalName="Win32\Debug\FluxoDeCaixa.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="exe\FluxoDeCaixa.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>FluxoDeCaixa.exe</RemoteName>
                         <Overwrite>true</Overwrite>
