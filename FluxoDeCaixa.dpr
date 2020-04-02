@@ -3,13 +3,13 @@ program FluxoDeCaixa;
 uses
   Vcl.Forms,
   ufrmMenu in 'forms\ufrmMenu.pas' {frmMenu},
-  ufrmParametros in 'forms\ufrmParametros.pas' {frmParametros},
-  ufrmPessoas in 'forms\ufrmPessoas.pas' {frmPessoas},
   ufrmTitulos in 'forms\ufrmTitulos.pas' {frmTitulos},
   uDM in 'forms\uDM.pas' {dm: TDataModule},
-  uParametrosDAO in 'dao\uParametrosDAO.pas',
-  uParametros in 'classes\uParametros.pas',
-  uParametrosControl in 'controls\uParametrosControl.pas';
+  uTitulosDAO in 'dao\uTitulosDAO.pas',
+  uTitulos in 'classes\uTitulos.pas',
+  uTitulosControl in 'controls\uTitulosControl.pas',
+  Utils in 'classes\Utils.pas',
+  ufrmCadastroTitulos in 'forms\ufrmCadastroTitulos.pas' {frmCadastroTitulos};
 
 {$R *.res}
 
@@ -19,5 +19,6 @@ begin
   Application.Title := 'Fluxo de Caixa';
   Application.CreateForm(Tdm, dm);
   Application.CreateForm(TfrmMenu, frmMenu);
+  Application.CreateForm(TfrmCadastroTitulos, frmCadastroTitulos);
   Application.Run;
 end.

@@ -106,14 +106,6 @@
             <Form>frmMenu</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="forms\ufrmParametros.pas">
-            <Form>frmParametros</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="forms\ufrmPessoas.pas">
-            <Form>frmPessoas</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="forms\ufrmTitulos.pas">
             <Form>frmTitulos</Form>
             <FormType>dfm</FormType>
@@ -123,9 +115,14 @@
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="dao\uParametrosDAO.pas"/>
-        <DCCReference Include="classes\uParametros.pas"/>
-        <DCCReference Include="controls\uParametrosControl.pas"/>
+        <DCCReference Include="dao\uTitulosDAO.pas"/>
+        <DCCReference Include="classes\uTitulos.pas"/>
+        <DCCReference Include="controls\uTitulosControl.pas"/>
+        <DCCReference Include="classes\Utils.pas"/>
+        <DCCReference Include="forms\ufrmCadastroTitulos.pas">
+            <Form>frmCadastroTitulos</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

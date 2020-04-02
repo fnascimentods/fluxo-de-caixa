@@ -14,8 +14,8 @@ object frmMenu: TfrmMenu
   PixelsPerInch = 96
   TextHeight = 13
   object Button1: TButton
-    Left = 344
-    Top = 184
+    Left = 328
+    Top = 208
     Width = 75
     Height = 25
     Caption = 'Button1'

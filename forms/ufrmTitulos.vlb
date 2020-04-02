@@ -1,0 +1,18 @@
+﻿[]
+Coordinates=104,10,84,36
+
+[Module Settings]
+ModelLayerNames=NewLayer0
+ActiveLayerNames=NewLayer0
+EditingLayerName=
+
+[ToolBar]
+Coordinates=10,56,67,36
+Visible=True
+
+[btnNovo]
+Coordinates=198,10,84,36
+
+[btnEditar]
+Coordinates=10,10,84,36
+
