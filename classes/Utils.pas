@@ -12,11 +12,19 @@ type
       constructor create;
       destructor destroy; override;
 
-      procedure notificarUsuario(titulo, mensagem: string);
+      procedure alertarUsuario(mensagem: string);
+      procedure confirmacaoUsuario(mensagem: string);
+
+      function perguntarUsuario(mensagem: string): boolean;
   end;
 implementation
 
 { TUtils }
+
+procedure TUtils.confirmacaoUsuario(mensagem: string);
+begin
+  Application.MessageBox(PChar(mensagem), 'Sucesso', MB_ICONINFORMATION + MB_OK);
+end;
 
 constructor TUtils.create;
 begin
@@ -29,9 +37,14 @@ begin
   inherited;
 end;
 
-procedure TUtils.notificarUsuario(titulo, mensagem: string);
+function TUtils.perguntarUsuario(mensagem: string): boolean;
 begin
-  Application.MessageBox(PChar(mensagem), '', MB_ICONEXCLAMATION + MB_OK);
+  Result := Application.MessageBox(PChar(mensagem), 'Confirmação', MB_ICONQUESTION + MB_YESNO) = 4;
+end;
+
+procedure TUtils.alertarUsuario(mensagem: string);
+begin
+  Application.MessageBox(PChar(mensagem), 'Atenção', MB_ICONEXCLAMATION + MB_OK);
 end;
 
 end.

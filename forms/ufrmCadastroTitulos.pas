@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Mask, RxToolEdit, RxCurrEdit,
   Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.ComCtrls, Vcl.ToolWin, RxLookup, uTitulos,
-  uTitulosControl;
+  uTitulosControl, System.ImageList, Vcl.ImgList, PngImageList;
 
 type
   TfrmCadastroTitulos = class(TForm)
@@ -26,9 +26,14 @@ type
     Label4: TLabel;
     Label5: TLabel;
     mmObservacoes: TMemo;
+    icones: TPngImageList;
     procedure FormCreate(Sender: TObject);
+    procedure btnSalvarClick(Sender: TObject);
+    procedure btnCancelarClick(Sender: TObject);
   private
     tituloControl: TTitulosControl;
+
+    procedure clear;
   public
     { Public declarations }
   end;
@@ -40,14 +45,37 @@ implementation
 
 {$R *.dfm}
 
+procedure TfrmCadastroTitulos.btnCancelarClick(Sender: TObject);
+begin
+  frmCadastroTitulos.Close;
+end;
+
+procedure TfrmCadastroTitulos.btnSalvarClick(Sender: TObject);
+begin
+  tituloControl.setNovoTitulo;
+  clear;
+end;
+
+procedure TfrmCadastroTitulos.clear;
+begin
+  edtDescricao.Clear;
+  dtpDataVencimento.Date := Date;
+  cedValor.Clear;
+  dblStatus.ResetField;
+  mmObservacoes.Clear;
+end;
+
 procedure TfrmCadastroTitulos.FormCreate(Sender: TObject);
 begin
   tituloControl := TTitulosControl.create;
 
-  dblStatus.LookupField := 'id';
+  dblStatus.LookupField   := 'id';
   dblStatus.LookupDisplay := 'descricao';
-  dblStatus.LookupSource := tituloControl.getStatus;
-  dblStatus.DisplayEmpty := ' ';
+  dblStatus.LookupSource  := tituloControl.getStatus;
+  dblStatus.DisplayEmpty  := ' ';
+
+  dtpDataVencimento.MinDate := Date;
+  dtpDataVencimento.Date    := Date;
 end;
 
 end.
