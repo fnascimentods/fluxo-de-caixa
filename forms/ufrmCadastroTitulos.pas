@@ -12,7 +12,6 @@ type
   TfrmCadastroTitulos = class(TForm)
     ToolBar: TToolBar;
     btnSalvar: TToolButton;
-    ToolButton4: TToolButton;
     btnCancelar: TToolButton;
     gbxCadastro: TGroupBox;
     pnBottom: TPanel;
