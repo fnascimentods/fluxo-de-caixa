@@ -33,8 +33,10 @@ type
     procedure dbgTitulosDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure btnDeletarClick(Sender: TObject);
+    procedure btnEditarClick(Sender: TObject);
   private
     tituloControl: TTitulosControl;
+    procedure editar;
   public
     { Public declarations }
   end;
@@ -51,7 +53,12 @@ var
   id: integer;
 begin
   id := dbgTitulos.DataSource.DataSet.FieldByName('id').AsInteger;
-  tituloControl.excluir(id);
+  tituloControl.excluirTitulo(id);
+end;
+
+procedure TfrmTitulos.btnEditarClick(Sender: TObject);
+begin
+  editar;
 end;
 
 procedure TfrmTitulos.btnNovoClick(Sender: TObject);
@@ -102,6 +109,22 @@ begin
 
     lbltotalRegistro.Caption := IntToStr(dbgTitulos.DataSource.DataSet.RecordCount);
   end;
+end;
+
+procedure TfrmTitulos.editar;
+begin
+  frmCadastroTitulos := TfrmCadastroTitulos.Create(frmCadastroTitulos);
+
+  with frmCadastroTitulos do
+  begin
+    editar := true;
+    tituloID := dbgTitulos.DataSource.DataSet.FieldByName('id').AsInteger;
+    edtDescricao.Text := dbgTitulos.DataSource.DataSet.FieldByName('descricao').AsString;
+    cedValor.Text := dbgTitulos.DataSource.DataSet.FieldByName('valor').AsString;
+    mmObservacoes.Lines.Add(dbgTitulos.DataSource.DataSet.FieldByName('observacoes').AsString);
+  end;
+
+  frmCadastroTitulos.ShowModal;
 end;
 
 procedure TfrmTitulos.FormCreate(Sender: TObject);

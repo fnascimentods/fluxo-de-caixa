@@ -49,6 +49,7 @@ object frmTitulos: TfrmTitulos
       ImageIndex = 1
       ParentShowHint = False
       ShowHint = True
+      OnClick = btnEditarClick
     end
     object btnDeletar: TToolButton
       Left = 150

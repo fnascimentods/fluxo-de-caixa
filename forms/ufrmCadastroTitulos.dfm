@@ -26,7 +26,6 @@ object frmCadastroTitulos: TfrmCadastroTitulos
     ButtonWidth = 75
     Caption = 'ToolBar'
     Color = clBtnHighlight
-    Ctl3D = True
     Customizable = True
     GradientEndColor = clActiveBorder
     GradientStartColor = clActiveBorder
@@ -71,8 +70,6 @@ object frmCadastroTitulos: TfrmCadastroTitulos
     ParentBiDiMode = False
     ParentColor = False
     TabOrder = 1
-    ExplicitTop = 70
-    ExplicitHeight = 243
     object Label1: TLabel
       Left = 20
       Top = 25
@@ -171,7 +168,6 @@ object frmCadastroTitulos: TfrmCadastroTitulos
     Color = clWindow
     ParentBackground = False
     TabOrder = 2
-    ExplicitTop = 333
   end
   object icones: TPngImageList
     Height = 64

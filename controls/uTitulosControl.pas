@@ -13,8 +13,8 @@ type
       constructor create;
       destructor destroy; override;
 
-      procedure setNovoTitulo;
-      procedure excluir(id: integer);
+      procedure setNovoTitulo(editar: boolean);
+      procedure excluirTitulo(id: integer);
 
       function getTitulos: TDataSource;
       function getTitulosByParam(descricao, statusid: string): TDataSource;
@@ -37,7 +37,7 @@ begin
   inherited;
 end;
 
-procedure TTitulosControl.excluir(id: integer);
+procedure TTitulosControl.excluirTitulo(id: integer);
 begin
   if funcoes.perguntarUsuario('Deseja realmente excluir?') then
   begin
@@ -59,10 +59,13 @@ end;
 
 function TTitulosControl.getTitulosByParam(descricao, statusid: string): TDataSource;
 begin
-  Result := tituloDAO.getTitulosByParam(descricao, statusid);
+  if (Trim(descricao) = '') and (statusid = '') then
+    Result := tituloDAO.getTitulos
+  else
+    Result := tituloDAO.getTitulosByParam(descricao, statusid);
 end;
 
-procedure TTitulosControl.setNovoTitulo;
+procedure TTitulosControl.setNovoTitulo(editar: boolean);
 var
   titulo: TTitulos;
 begin
@@ -83,17 +86,29 @@ begin
       if Trim(dblStatus.Text) = '' then
         raise Exception.Create('O campo ''Status'' é obrigatório!');
 
+      titulo.ID             := tituloID;
       titulo.descricao      := edtDescricao.Text;
       titulo.valor          := cedValor.Value;
       titulo.datalancamento := StrToDate(FormatDateTime('dd/mm/yyyy', Date));
       titulo.datavencimento := dtpDataVencimento.Date;
       titulo.statusid       := StrToInt(dblStatus.Value);
       titulo.observacoes    := mmObservacoes.Lines.Text;
+
+      Clear;
     end;
 
-    tituloDAO.setNovoTitulo(titulo);
+    if editar then
+    begin
+      tituloDAO.editarTitulo(titulo);
 
-    funcoes.confirmacaoUsuario('Título cadastrado com sucesso!');
+      funcoes.confirmacaoUsuario('Título alterado com sucesso!');
+    end
+    else
+    begin
+      tituloDAO.setNovoTitulo(titulo);
+
+      funcoes.confirmacaoUsuario('Título cadastrado com sucesso!');
+    end;
 
     titulo.Free;
   except

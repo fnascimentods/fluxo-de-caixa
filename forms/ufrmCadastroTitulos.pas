@@ -31,10 +31,11 @@ type
     procedure btnCancelarClick(Sender: TObject);
   private
     tituloControl: TTitulosControl;
+  public
+    tituloID: integer;
+    editar: boolean;
 
     procedure clear;
-  public
-    { Public declarations }
   end;
 
 var
@@ -51,8 +52,7 @@ end;
 
 procedure TfrmCadastroTitulos.btnSalvarClick(Sender: TObject);
 begin
-  tituloControl.setNovoTitulo;
-  clear;
+  tituloControl.setNovoTitulo(editar);
 end;
 
 procedure TfrmCadastroTitulos.clear;
@@ -75,6 +75,8 @@ begin
 
   dtpDataVencimento.MinDate := Date;
   dtpDataVencimento.Date    := Date;
+
+  editar := false;
 end;
 
 end.
