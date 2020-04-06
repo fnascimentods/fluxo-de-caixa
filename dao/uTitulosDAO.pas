@@ -12,6 +12,7 @@ type
       ds: TDataSource;
     public
       procedure setNovoTitulo(titulo: TTitulos);
+      procedure excluirTitulo(id: integer);
 
       function getTitulos: TDataSource;
       function getTitulosByParam(descricao, statusid: string): TDataSource;
@@ -21,6 +22,27 @@ type
 implementation
 
 { TitulosDAO }
+
+procedure TitulosDAO.excluirTitulo(id: integer);
+var
+  zqSet: TZQuery;
+begin
+  zqSet := TZQuery.Create(zquery);
+  zqSet.Connection := dm.conexao;
+
+  try
+    zqSet.Close;
+    zqSet.SQL.Clear;
+    zqSet.SQL.Add(' delete from Titulo where id = :id ');
+
+    zqSet.ParamByName('id').AsInteger := id;
+
+    zqSet.ExecSQL;
+  finally
+    zqSet.Close;
+    zqSet.Free;
+  end;
+end;
 
 function TitulosDAO.getStatus: TDataSource;
 var

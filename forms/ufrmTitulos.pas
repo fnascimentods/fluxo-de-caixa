@@ -32,6 +32,7 @@ type
     procedure btnNovoClick(Sender: TObject);
     procedure dbgTitulosDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure btnDeletarClick(Sender: TObject);
   private
     tituloControl: TTitulosControl;
   public
@@ -44,6 +45,14 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TfrmTitulos.btnDeletarClick(Sender: TObject);
+var
+  id: integer;
+begin
+  id := dbgTitulos.DataSource.DataSet.FieldByName('id').AsInteger;
+  tituloControl.excluir(id);
+end;
 
 procedure TfrmTitulos.btnNovoClick(Sender: TObject);
 begin

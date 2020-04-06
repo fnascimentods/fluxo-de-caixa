@@ -39,7 +39,7 @@ end;
 
 function TUtils.perguntarUsuario(mensagem: string): boolean;
 begin
-  Result := Application.MessageBox(PChar(mensagem), 'Confirmação', MB_ICONQUESTION + MB_YESNO) = 4;
+  Result := Application.MessageBox(PChar(mensagem), 'Confirmação', MB_ICONQUESTION + MB_YESNO) = IDYES;
 end;
 
 procedure TUtils.alertarUsuario(mensagem: string);

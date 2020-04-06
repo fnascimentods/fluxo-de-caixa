@@ -14,6 +14,7 @@ type
       destructor destroy; override;
 
       procedure setNovoTitulo;
+      procedure excluir(id: integer);
 
       function getTitulos: TDataSource;
       function getTitulosByParam(descricao, statusid: string): TDataSource;
@@ -23,7 +24,7 @@ implementation
 
 { TTitulosControl }
 
-uses ufrmCadastroTitulos;
+uses ufrmCadastroTitulos, ufrmTitulos;
 
 constructor TTitulosControl.create;
 begin
@@ -34,6 +35,16 @@ destructor TTitulosControl.destroy;
 begin
   tituloDAO.Free;
   inherited;
+end;
+
+procedure TTitulosControl.excluir(id: integer);
+begin
+  if funcoes.perguntarUsuario('Deseja realmente excluir?') then
+  begin
+    tituloDAO.excluirTitulo(id);
+    frmTitulos.dbgTitulos.DataSource.DataSet.Refresh;
+    funcoes.confirmacaoUsuario('Título excluído com sucesso!');
+  end;
 end;
 
 function TTitulosControl.getStatus: TDataSource;

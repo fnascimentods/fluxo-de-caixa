@@ -58,6 +58,7 @@ object frmTitulos: TfrmTitulos
       ImageIndex = 2
       ParentShowHint = False
       ShowHint = True
+      OnClick = btnDeletarClick
     end
     object btnPesquisar: TToolButton
       Left = 225
@@ -141,7 +142,6 @@ object frmTitulos: TfrmTitulos
     Color = clWindow
     ParentBackground = False
     TabOrder = 2
-    ExplicitTop = 437
     object Label3: TLabel
       Left = 20
       Top = 25
