@@ -29,8 +29,11 @@ type
     procedure FormCreate(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     tituloControl: TTitulosControl;
+
+    counter: integer;
   public
     tituloID: integer;
     editar: boolean;
@@ -52,6 +55,9 @@ end;
 
 procedure TfrmCadastroTitulos.btnSalvarClick(Sender: TObject);
 begin
+  counter := counter + 1;
+  if counter = 2 then
+    counter := 0;
   tituloControl.setNovoTitulo(editar);
 end;
 
@@ -62,6 +68,17 @@ begin
   cedValor.Clear;
   dblStatus.ResetField;
   mmObservacoes.Clear;
+end;
+
+procedure TfrmCadastroTitulos.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  try
+    tituloControl.Free;
+  finally
+    Action := caFree;
+    frmCadastroTitulos := nil;
+  end;
 end;
 
 procedure TfrmCadastroTitulos.FormCreate(Sender: TObject);

@@ -42,7 +42,7 @@ begin
   if funcoes.perguntarUsuario('Deseja realmente excluir?') then
   begin
     tituloDAO.excluirTitulo(id);
-    frmTitulos.dbgTitulos.DataSource.DataSet.Refresh;
+
     funcoes.confirmacaoUsuario('Título excluído com sucesso!');
   end;
 end;

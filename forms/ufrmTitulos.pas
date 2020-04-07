@@ -34,6 +34,7 @@ type
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure btnDeletarClick(Sender: TObject);
     procedure btnEditarClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     tituloControl: TTitulosControl;
     procedure editar;
@@ -54,11 +55,14 @@ var
 begin
   id := dbgTitulos.DataSource.DataSet.FieldByName('id').AsInteger;
   tituloControl.excluirTitulo(id);
+
 end;
 
 procedure TfrmTitulos.btnEditarClick(Sender: TObject);
 begin
   editar;
+
+
 end;
 
 procedure TfrmTitulos.btnNovoClick(Sender: TObject);
@@ -66,7 +70,6 @@ begin
   frmCadastroTitulos := TfrmCadastroTitulos.Create(frmCadastroTitulos);
   frmCadastroTitulos.ShowModal;
 
-  dbgTitulos.DataSource.DataSet.Refresh;
   lbltotalRegistro.Caption := IntToStr(dbgTitulos.DataSource.DataSet.RecordCount);
 end;
 
@@ -79,6 +82,7 @@ procedure TfrmTitulos.dbgTitulosDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 var
   texto: string;
+  valor: currency;
 begin
   with (Sender as TDBGrid).Canvas do
   begin
@@ -87,7 +91,7 @@ begin
     if State = [] then
     begin
       if dbgTitulos.DataSource.DataSet.RecNo mod 2 = 1 then
-         dbgTitulos.Canvas.Brush.Color := $00EBCE87
+         dbgTitulos.Canvas.Brush.Color := $00F3E2A9
       else
          dbgTitulos.Canvas.Brush.Color := clWhite;
     end;
@@ -97,7 +101,13 @@ begin
     Font.Size := 8;
 
     if (gdSelected in State) or (gdFocused in State) then
-       TDBGrid(Sender).Canvas.Brush.Color := $00CBC0FF;
+       TDBGrid(Sender).Canvas.Brush.Color := $0081F7F3;
+
+    if dbgTitulos.DataSource.DataSet.FieldByName('status').AsString = 'Receita' then
+       TDBGrid(Sender).Canvas.Font.Color := $00088A08;
+
+    if dbgTitulos.DataSource.DataSet.FieldByName('status').AsString = 'Despesa' then
+       TDBGrid(Sender).Canvas.Font.Color := $000101DF;
 
     dbgTitulos.DefaultDrawColumnCell(Rect, DataCol, Column, State);
 
@@ -105,7 +115,14 @@ begin
     if not (State=[]) then
        DrawFocusRect(Rect);
 
-    TextOut(Rect.Left+2, Rect.Top+1, texto);
+    if Column.FieldName = 'valor' then
+    begin
+      valor := dbgTitulos.DataSource.DataSet.FieldByName(Column.Field.FieldName).AsCurrency;
+      texto := FormatFloat('###,##0.00', valor);
+      TextOut(Rect.Right - (TextWidth(texto)+6), Rect.Top+1, texto);
+    end
+    else
+      TextOut(Rect.Left+2, Rect.Top+1, texto);
 
     lbltotalRegistro.Caption := IntToStr(dbgTitulos.DataSource.DataSet.RecordCount);
   end;
@@ -125,6 +142,16 @@ begin
   end;
 
   frmCadastroTitulos.ShowModal;
+end;
+
+procedure TfrmTitulos.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  try
+    tituloControl.Free;
+  finally
+    Action := caFree;
+    frmTitulos := nil;
+  end;
 end;
 
 procedure TfrmTitulos.FormCreate(Sender: TObject);

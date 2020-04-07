@@ -32,27 +32,28 @@ begin
   zqSet.Connection := dm.conexao;
 
   try
-    zqSet.Close;
-    zqSet.SQL.Clear;
-    zqSet.SQL.Add(' update Titulo set                   ');
-    zqSet.SQL.Add('   descricao = :descricao,           ');
-    zqSet.SQL.Add('   valor = :valor,                   ');
-    zqSet.SQL.Add('   datavencimento = :datavencimento, ');
-    zqSet.SQL.Add('   statusid = :statusid,             ');
-    zqSet.SQL.Add('   observacoes = :observacoes        ');
-    zqSet.SQL.Add(' where id = :id                      ');
-
-    zqSet.ParamByName('descricao').AsString    := titulo.descricao;
-    zqSet.ParamByName('valor').AsFloat         := titulo.valor;
-    zqSet.ParamByName('datavencimento').AsDate := titulo.datavencimento;
-    zqSet.ParamByName('statusid').AsInteger    := titulo.statusid;
-    zqSet.ParamByName('observacoes').AsString  := titulo.observacoes;
-    zqSet.ParamByName('id').AsInteger          := titulo.ID;
-
-    zqSet.ExecSQL;
-
+    dm.conexao.StartTransaction;
     try
-      dm.conexao.StartTransaction;
+      zqSet.Close;
+      zqSet.SQL.Clear;
+      zqSet.SQL.Add(' update Titulo set                   ');
+      zqSet.SQL.Add('   descricao = :descricao,           ');
+      zqSet.SQL.Add('   valor = :valor,                   ');
+      zqSet.SQL.Add('   datavencimento = :datavencimento, ');
+      zqSet.SQL.Add('   statusid = :statusid,             ');
+      zqSet.SQL.Add('   observacoes = :observacoes        ');
+      zqSet.SQL.Add(' where id = :id                      ');
+
+      zqSet.ParamByName('descricao').AsString    := titulo.descricao;
+      zqSet.ParamByName('valor').AsFloat         := titulo.valor;
+      zqSet.ParamByName('datavencimento').AsDate := titulo.datavencimento;
+      zqSet.ParamByName('statusid').AsInteger    := titulo.statusid;
+      zqSet.ParamByName('observacoes').AsString  := titulo.observacoes;
+      zqSet.ParamByName('id').AsInteger          := titulo.ID;
+
+      zqSet.ExecSQL;
+
+      dm.conexao.Commit;
     except
       on e: Exception do
         dm.conexao.Rollback;
@@ -190,21 +191,22 @@ begin
   ' )                                  ';
 
   try
-    zqSet.Close;
-    zqSet.SQL.Clear;
-    zqSet.SQL.Add(sql);
-
-    zqSet.ParamByName('descricao').AsString    := titulo.descricao;
-    zqSet.ParamByName('valor').AsFloat         := titulo.valor;
-    zqSet.ParamByName('datalancamento').AsDate := titulo.datalancamento;
-    zqSet.ParamByName('datavencimento').AsDate := titulo.datavencimento;
-    zqSet.ParamByName('statusid').AsInteger    := titulo.statusid;
-    zqSet.ParamByName('observacoes').AsString  := titulo.observacoes;
-
-    zqSet.ExecSQL;
-
+    dm.conexao.StartTransaction;
     try
-      dm.conexao.StartTransaction;
+      zqSet.Close;
+      zqSet.SQL.Clear;
+      zqSet.SQL.Add(sql);
+
+      zqSet.ParamByName('descricao').AsString    := titulo.descricao;
+      zqSet.ParamByName('valor').AsFloat         := titulo.valor;
+      zqSet.ParamByName('datalancamento').AsDate := titulo.datalancamento;
+      zqSet.ParamByName('datavencimento').AsDate := titulo.datavencimento;
+      zqSet.ParamByName('statusid').AsInteger    := titulo.statusid;
+      zqSet.ParamByName('observacoes').AsString  := titulo.observacoes;
+
+      zqSet.ExecSQL;
+
+      dm.conexao.Commit;
     except
       on e: Exception do
         dm.conexao.Rollback;

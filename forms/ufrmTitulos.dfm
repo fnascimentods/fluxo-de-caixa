@@ -15,6 +15,7 @@ object frmTitulos: TfrmTitulos
   KeyPreview = True
   OldCreateOrder = False
   Position = poDesktopCenter
+  OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
@@ -205,9 +206,11 @@ object frmTitulos: TfrmTitulos
         Visible = True
       end
       item
+        Alignment = taRightJustify
         Expanded = False
         FieldName = 'valor'
-        Title.Caption = 'Valor (R$)'
+        Title.Alignment = taRightJustify
+        Title.Caption = '(R$) Valor  '
         Title.Font.Charset = DEFAULT_CHARSET
         Title.Font.Color = clWindowText
         Title.Font.Height = -11
@@ -217,8 +220,10 @@ object frmTitulos: TfrmTitulos
         Visible = True
       end
       item
+        Alignment = taCenter
         Expanded = False
         FieldName = 'status'
+        Title.Alignment = taCenter
         Title.Caption = 'Status'
         Title.Font.Charset = DEFAULT_CHARSET
         Title.Font.Color = clWindowText
