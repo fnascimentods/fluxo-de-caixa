@@ -9,7 +9,8 @@ uses
   uTitulos in 'classes\uTitulos.pas',
   uTitulosControl in 'controls\uTitulosControl.pas',
   Utils in 'classes\Utils.pas',
-  ufrmCadastroTitulos in 'forms\ufrmCadastroTitulos.pas' {frmCadastroTitulos};
+  ufrmCadastroTitulos in 'forms\ufrmCadastroTitulos.pas' {frmCadastroTitulos},
+  ufrmImprimir in 'forms\ufrmImprimir.pas' {frmImprimir};
 
 {$R *.res}
 
@@ -19,6 +20,5 @@ begin
   Application.Title := 'Fluxo de Caixa';
   Application.CreateForm(Tdm, dm);
   Application.CreateForm(TfrmMenu, frmMenu);
-  Application.CreateForm(TfrmCadastroTitulos, frmCadastroTitulos);
   Application.Run;
 end.

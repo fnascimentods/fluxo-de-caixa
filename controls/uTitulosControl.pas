@@ -102,6 +102,8 @@ begin
       tituloDAO.editarTitulo(titulo);
 
       funcoes.confirmacaoUsuario('Título alterado com sucesso!');
+
+      frmCadastroTitulos.Close;
     end
     else
     begin

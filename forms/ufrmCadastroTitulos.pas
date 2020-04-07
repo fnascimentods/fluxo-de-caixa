@@ -32,8 +32,6 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     tituloControl: TTitulosControl;
-
-    counter: integer;
   public
     tituloID: integer;
     editar: boolean;
@@ -55,9 +53,6 @@ end;
 
 procedure TfrmCadastroTitulos.btnSalvarClick(Sender: TObject);
 begin
-  counter := counter + 1;
-  if counter = 2 then
-    counter := 0;
   tituloControl.setNovoTitulo(editar);
 end;
 
@@ -94,6 +89,8 @@ begin
   dtpDataVencimento.Date    := Date;
 
   editar := false;
+
+  cedValor.MaxLength := 9;
 end;
 
 end.

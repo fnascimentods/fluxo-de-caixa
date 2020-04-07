@@ -123,9 +123,9 @@ object frmCadastroTitulos: TfrmCadastroTitulos
       Top = 95
       Width = 90
       Height = 21
-      BiDiMode = bdRightToLeft
+      BiDiMode = bdLeftToRight
       ParentBiDiMode = False
-      TabOrder = 1
+      TabOrder = 2
     end
     object dtpDataVencimento: TDateTimePicker
       Left = 307
@@ -135,7 +135,7 @@ object frmCadastroTitulos: TfrmCadastroTitulos
       Date = 43923.000000000000000000
       MaxDate = 401404.999988425900000000
       MinDate = 18264.000000000000000000
-      TabOrder = 2
+      TabOrder = 1
     end
     object dblStatus: TRxDBLookupCombo
       Left = 130
@@ -149,7 +149,7 @@ object frmCadastroTitulos: TfrmCadastroTitulos
     end
     object mmObservacoes: TMemo
       Left = 20
-      Top = 150
+      Top = 151
       Width = 265
       Height = 65
       BiDiMode = bdLeftToRight

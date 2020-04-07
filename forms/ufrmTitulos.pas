@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
   Vcl.ExtCtrls, Vcl.ComCtrls, Vcl.ToolWin, uTitulosControl, Vcl.WinXCtrls,
   Vcl.StdCtrls, Vcl.Mask, RxToolEdit, RxLookup, ufrmCadastroTitulos,
-  System.ImageList, Vcl.ImgList, PngImageList;
+  System.ImageList, Vcl.ImgList, PngImageList, ufrmImprimir;
 
 type
   TfrmTitulos = class(TForm)
@@ -27,6 +27,7 @@ type
     icones: TPngImageList;
     Label3: TLabel;
     lbltotalRegistro: TLabel;
+    btnImprimir: TToolButton;
     procedure FormCreate(Sender: TObject);
     procedure btnPesquisarClick(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);
@@ -35,11 +36,12 @@ type
     procedure btnDeletarClick(Sender: TObject);
     procedure btnEditarClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnImprimirClick(Sender: TObject);
   private
     tituloControl: TTitulosControl;
     procedure editar;
   public
-    { Public declarations }
+    dataSource: TDataSource;
   end;
 
 var
@@ -56,13 +58,20 @@ begin
   id := dbgTitulos.DataSource.DataSet.FieldByName('id').AsInteger;
   tituloControl.excluirTitulo(id);
 
+  dbgTitulos.dataSource := tituloControl.getTitulos;
 end;
 
 procedure TfrmTitulos.btnEditarClick(Sender: TObject);
 begin
   editar;
 
+  dbgTitulos.dataSource := tituloControl.getTitulos;
+end;
 
+procedure TfrmTitulos.btnImprimirClick(Sender: TObject);
+begin
+  frmImprimir := TfrmImprimir.Create(frmImprimir);
+  frmImprimir.RLReport.Preview();
 end;
 
 procedure TfrmTitulos.btnNovoClick(Sender: TObject);
@@ -70,12 +79,14 @@ begin
   frmCadastroTitulos := TfrmCadastroTitulos.Create(frmCadastroTitulos);
   frmCadastroTitulos.ShowModal;
 
+  dbgTitulos.dataSource := tituloControl.getTitulos;
   lbltotalRegistro.Caption := IntToStr(dbgTitulos.DataSource.DataSet.RecordCount);
 end;
 
 procedure TfrmTitulos.btnPesquisarClick(Sender: TObject);
 begin
-  dbgTitulos.DataSource := tituloControl.getTitulosByParam(edtDescricao.Text, dblStatus.value);
+  dataSource := tituloControl.getTitulosByParam(edtDescricao.Text, dblStatus.value);
+  dbgTitulos.DataSource := dataSource;
 end;
 
 procedure TfrmTitulos.dbgTitulosDrawColumnCell(Sender: TObject;
@@ -157,8 +168,10 @@ end;
 procedure TfrmTitulos.FormCreate(Sender: TObject);
 begin
   tituloControl := TTitulosControl.create;
+  dataSource := TDataSource.Create(dataSource);
 
   dbgTitulos.dataSource := tituloControl.getTitulos;
+  dataSource            := tituloControl.getTitulos;
 
   dblStatus.LookupField := 'id';
   dblStatus.LookupDisplay := 'descricao';
