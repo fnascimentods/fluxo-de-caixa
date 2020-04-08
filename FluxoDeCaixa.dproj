@@ -102,10 +102,6 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="forms\ufrmMenu.pas">
-            <Form>frmMenu</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="forms\ufrmTitulos.pas">
             <Form>frmTitulos</Form>
             <FormType>dfm</FormType>
